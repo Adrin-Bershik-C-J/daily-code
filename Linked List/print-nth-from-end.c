@@ -1,4 +1,4 @@
-//Reverse a Linked List (Iterative)
+//Find the Nth Node from the End (Two-Pointer Method)
 
 #include<stdlib.h>
 #include<stdio.h>
@@ -11,11 +11,11 @@ struct Node{
 
 void printNodes(struct Node *head);
 struct Node *appendNode(struct Node *head,int value);
-struct Node *reverseNodes(struct Node *head);
+void printNthFromEnd(struct Node *head,int num);
     
 int main(){
     
-    int num;
+    int num,find;
     char ch[3];
     struct Node *head=NULL;
     
@@ -29,13 +29,14 @@ int main(){
 
     }while(strcmp(ch,"y")==0);
     
-    printf("The node values before getting reversed:");
+    printf("The node values:");
     printNodes(head);
     printf("\n");
     
-    head=reverseNodes(head);
-    printf("The node values after getting reversed:");
-    printNodes(head);
+    printf("Enter the node whose value should be print from the end:");
+    scanf("%d",&find);
+    
+    printNthFromEnd(head,find);
     
     return 0;
 }
@@ -71,16 +72,19 @@ void printNodes(struct Node *head){
     
 }
 
-struct Node *reverseNodes(struct Node *head){
-    struct Node *next,*curr,*prev;
-    next=NULL;
-    prev=NULL;
-    curr=head;
-    while(curr!=NULL){
-        next=curr->right;
-        curr->right=prev;
-        prev=curr;
-        curr=next;
+void printNthFromEnd(struct Node *head,int value){
+    struct Node *first=head,*second=head;
+    int i;
+    for(i=0;i<value;i++){
+        if(first==NULL){
+            printf("Index out of range!\n");
+            return;
+        }
+        first=first->right;
     }
-    return prev;
+    while(first){
+        first=first->right;
+        second=second->right;
+    }
+    printf("The value of the %d node from the end is %d",value,second->value);
 }
