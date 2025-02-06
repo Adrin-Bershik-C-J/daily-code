@@ -60,8 +60,8 @@ void push() {
     }
 
     newNode->value = value;
-    newNode->right = top; // Link the new node to the current top
-    top = newNode; // Update top pointer
+    newNode->right = top; 
+    top = newNode; 
     printf("%d pushed onto the stack.\n", value);
 }
 
